@@ -7,43 +7,22 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Feather } from "@expo/vector-icons";
-import Download from "./Download";
-import Bookmark from "./Bookmark";
-import Account from "./Account";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SettingsCard from "../components/SettingsCard";
+import { Feather } from "@expo/vector-icons";
 
-const Tab = createMaterialTopTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Bookmark"
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: "#000",
-        },
-        tabBarActiveTintColor: "#eee",
-        tabBarIndicatorStyle: {
-          backgroundColor: "#eee",
-        },
-      }}
-    >
-      <Tab.Screen name="Download" component={Download} />
-      <Tab.Screen name="Bookmark" component={Bookmark} />
-      <Tab.Screen name="Account" component={Account} />
-    </Tab.Navigator>
-  );
-}
-
-function Profile() {
+function Profile({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.profileArea}>
           <View style={styles.navbar}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Account");
+              }}
+              style={styles.settingsIcon}
+            >
               <Feather name="settings" size={32} color="white"></Feather>
             </TouchableOpacity>
           </View>
@@ -55,8 +34,17 @@ function Profile() {
               borderRadius={50}
             ></Image>
           </View>
-          <MyTabs />
         </View>
+        <SettingsCard
+          iconName={"download"}
+          navigation={navigation}
+          title={"Download"}
+        />
+        <SettingsCard
+          iconName={"bookmark"}
+          navigation={navigation}
+          title={"Bookmark"}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -72,6 +60,9 @@ const styles = StyleSheet.create({
   },
   Text: {
     color: "#eee",
+  },
+  settingsIcon: {
+    marginTop: "4%",
   },
   navbar: {
     width: "100%",

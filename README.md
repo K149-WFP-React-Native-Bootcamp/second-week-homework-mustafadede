@@ -8,4 +8,4 @@
 
 <br>
 
-![README Pic](./pic.gif)
+![README Video](./assets/images/readme.mp4)

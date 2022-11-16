@@ -14,6 +14,7 @@ export default EpisodeCard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#e67",
   },
   card: {
     width: "100%",

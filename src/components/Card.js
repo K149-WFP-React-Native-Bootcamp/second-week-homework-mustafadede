@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 190,
-    paddingHorizontal: 27,
+    paddingLeft: 27,
+    paddingLeft: 27,
   },
   searchCard: {
     width: 190,
@@ -43,7 +44,6 @@ const styles = StyleSheet.create({
   Text: {
     marginTop: "5%",
     color: "#eee",
-    textAlign: "center",
   },
 });
 

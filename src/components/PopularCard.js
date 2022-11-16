@@ -1,18 +1,26 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 
-function PopularCard() {
+function PopularCard({ title, image, id, navigation }) {
   return (
-    <TouchableOpacity style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapper}
+      onPress={() => {
+        navigation.navigate("Details", {
+          id: id,
+          name: title,
+        });
+      }}
+    >
       <Image
         source={{
-          uri: "https://i.pinimg.com/originals/db/db/ba/dbdbbad5798bfc3ff27a499dc5ca2b30.gif",
+          uri: `${image}`,
         }}
         resizeMode="cover"
         style={styles.cardInfo}
       />
       <View style={styles.cardWrapper}>
-        <Text style={styles.cardHeader}>30 Best Movies on NETFLIX</Text>
+        <Text style={styles.cardHeader}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -22,8 +30,10 @@ export default PopularCard;
 
 const styles = StyleSheet.create({
   wrapper: {
+    marginHorizontal: "5%",
+    marginVertical: "4%",
     borderRadius: 24,
-    height: "24%",
+    height: 164,
   },
   cardInfo: {
     width: "100%",

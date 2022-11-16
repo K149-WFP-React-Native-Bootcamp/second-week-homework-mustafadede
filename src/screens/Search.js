@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import React, { useState } from "react";
+import { Text, View, StyleSheet, TextInput, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DATA from "../../assets/data/listData";
 import Card from "../components/Card";
 
 export default function Search({ navigation }) {
+  const [filteredData, setFilteredData] = useState("");
+
+  function filteredSearch(text) {
+    const filteredOriginalData = DATA.filter((item) => {
+      if (item.title.toLowerCase().includes(text.toLowerCase())) {
+        return item.title;
+      }
+    });
+    setFilteredData(filteredOriginalData);
+  }
+
   const renderData = ({ item }) => {
     return (
       <Card
@@ -35,6 +39,9 @@ export default function Search({ navigation }) {
               <TextInput
                 style={styles.input}
                 placeholder="Movie, Series ?"
+                onChangeText={(e) => {
+                  filteredSearch(e);
+                }}
               ></TextInput>
             </View>
             <View style={styles.resultsWrapper}>
@@ -42,7 +49,7 @@ export default function Search({ navigation }) {
             </View>
           </>
         }
-        data={DATA}
+        data={filteredData ? filteredData : DATA}
         renderItem={renderData}
         keyExtractor={(item) => item.id}
         style={styles.card}

@@ -9,13 +9,13 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
 import DATA from "../../assets/data/listData";
 import reversedDATA from "../../assets/data/reversedListData";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Episode from "../components/Episode";
 import Trailer from "../components/Trailer";
 import Info from "../components/Info";
+import popularList from "../../assets/data/popularList";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -42,7 +42,12 @@ function MoreDetails() {
 
 const dataResult = (name, id, info) => {
   let res = "";
-  let listName = name === "DATA" ? DATA : reversedDATA;
+  let listName =
+    name === "DATA"
+      ? DATA
+      : name === "reversedDATA"
+      ? reversedDATA
+      : popularList;
 
   listName.forEach((item) => {
     if (item.id === id) {
@@ -52,7 +57,7 @@ const dataResult = (name, id, info) => {
   return res;
 };
 
-function Details({ route, navigation }) {
+function Details({ route }) {
   const { name, id } = route.params;
   return (
     <SafeAreaView style={styles.container}>
@@ -69,15 +74,6 @@ function Details({ route, navigation }) {
             end={{ x: 0, y: 0.5 }}
             style={styles.background}
           />
-          <View style={styles.navbar}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Ionicons name="chevron-back" size={42} color="white" />
-            </TouchableOpacity>
-          </View>
           <View style={styles.Info}>
             <Text style={[styles.text, styles.title]}>
               {dataResult(name, id, "title")}
@@ -101,13 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-  },
-  navbar: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: "2%",
-    width: "100%",
-    paddingHorizontal: "4%",
   },
   image: {
     width: "100%",
