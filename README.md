@@ -8,4 +8,19 @@
 
 <br>
 
-![README Pic](./pic.gif)
+## Kullanım
+
+Uygulamayı bilgisayarınızda başlatmak için terminale
+<br>
+`git clone https://github.com/K149-WFP-React-Native-Bootcamp/second-week-homework-mustafadede.git`
+<br>
+yazıp dosyayı indirdikten sonra klasör içerisine giriniz. Girdikten sonra paketleri indirebilmek için
+<br>
+`npm install`
+<br>
+ve uygulamayı başlatabilmek için
+<br>
+`npm expo start`
+<br>
+
+![README Video](./assets/images/readme.mp4)
